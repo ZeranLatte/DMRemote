@@ -1,0 +1,6 @@
+framework module Pods_AddOnForDM {
+  umbrella header "Pods-AddOnForDM-umbrella.h"
+
+  export *
+  module * { export * }
+}

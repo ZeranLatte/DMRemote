@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Menlo.ttc">
+            <string>Menlo-Bold</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="JitterAnimation" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zk0-f7-MMA">
+                                <rect key="frame" x="78" y="570" width="82" height="32"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.96054964539007093" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="Menlo-Bold" family="Menlo" pointSize="17"/>
+                                <state key="normal" title="Click me">
+                                    <color key="titleColor" red="0.40000000000000002" green="0.59999999999999998" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="handleTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jAj-c4-aHM"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Input Field 2 ~" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zQE-gG-FEJ">
+                                <rect key="frame" x="78" y="204" width="220" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="oDT-uS-Nh4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Input Field 1 ~" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7me-v1-mHP">
+                                <rect key="frame" x="78" y="105" width="220" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="69h-in-li8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please correct you input ~ ~ ~" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="brl-Bf-LFd">
+                                <rect key="frame" x="78" y="496" width="231" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="YUn-b1-RxY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.36862745099999999" green="0.75686274509999996" blue="0.59215686270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="brl-Bf-LFd" secondAttribute="trailing" constant="66" id="0Fd-d7-iLM"/>
+                            <constraint firstAttribute="trailing" secondItem="Zk0-f7-MMA" secondAttribute="trailing" constant="215" id="7lm-Pq-ZSN"/>
+                            <constraint firstItem="zQE-gG-FEJ" firstAttribute="trailing" secondItem="7me-v1-mHP" secondAttribute="trailing" id="J1a-hY-x5L"/>
+                            <constraint firstItem="zQE-gG-FEJ" firstAttribute="leading" secondItem="7me-v1-mHP" secondAttribute="leading" id="QeV-XM-lBi"/>
+                            <constraint firstAttribute="trailing" secondItem="7me-v1-mHP" secondAttribute="trailing" constant="77" id="Tbp-uw-lXF"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Zk0-f7-MMA" secondAttribute="bottom" constant="65" id="VvW-lV-ljt"/>
+                            <constraint firstItem="7me-v1-mHP" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="85" id="YHB-q3-YFU"/>
+                            <constraint firstItem="Zk0-f7-MMA" firstAttribute="top" secondItem="brl-Bf-LFd" secondAttribute="bottom" constant="44" id="Zg6-GF-NWa"/>
+                            <constraint firstAttribute="bottom" secondItem="brl-Bf-LFd" secondAttribute="bottom" constant="141" id="etk-kR-C1P"/>
+                            <constraint firstItem="7me-v1-mHP" firstAttribute="leading" secondItem="brl-Bf-LFd" secondAttribute="leading" id="kiz-F7-Dqf"/>
+                            <constraint firstItem="7me-v1-mHP" firstAttribute="leading" secondItem="Zk0-f7-MMA" secondAttribute="leading" id="tFi-25-vbi"/>
+                            <constraint firstItem="zQE-gG-FEJ" firstAttribute="top" secondItem="7me-v1-mHP" secondAttribute="bottom" constant="59" id="ugz-Vm-t0y"/>
+                            <constraint firstItem="7me-v1-mHP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="78" id="vbG-Sg-cyJ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="fadeLabel" destination="brl-Bf-LFd" id="rhe-q3-YUC"/>
+                        <outlet property="inputTF1" destination="7me-v1-mHP" id="B3S-dy-Abn"/>
+                        <outlet property="inputTF2" destination="zQE-gG-FEJ" id="pfn-rr-Y5j"/>
+                        <outlet property="jitterBtn" destination="Zk0-f7-MMA" id="sp8-Mw-Xnu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-31.199999999999999" y="311.69415292353824"/>
+        </scene>
+    </scenes>
+</document>
