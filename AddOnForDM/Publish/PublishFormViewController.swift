@@ -24,6 +24,12 @@ class PublishFormViewController: UIViewController {
         btn.backgroundColor = .black
         return btn
     }()
+    
+    lazy var scrollView: UIScrollView = {
+        let scr = UIScrollView()
+        
+        return scr
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,13 +57,46 @@ class PublishFormViewController: UIViewController {
             make.height.equalTo(58)
             make.left.right.bottom.equalTo(view)
         }
+        pubButton.addTarget(self, action: #selector(handlePub), for: .touchUpInside)
+        view.addSubview(scrollView)
+        scrollView.snp.makeConstraints { (make) in
+            make.edges.equalTo(UIEdgeInsets(top: 0, left: 0, bottom: 58, right: 0))
+        }
+        
+        let options = PublishForm.options
+        print("Scroll View - ")
+        print(scrollView.frame)
+        for (index, opt) in options.enumerated() {
+            let leftText = opt[0]
+            let rightText = opt[1]
+            let hasArrow = index != 3 ? true : false
+            let optview = PublishFormSelectionView(leftTitle: leftText, rightTitle: rightText, withArrow: hasArrow)
+            scrollView.addSubview(optview)
+            optview.snp.makeConstraints({ (make) in
+                make.width.centerX.equalTo(scrollView)
+                make.top.equalTo(150 + index * 78)
+                make.height.equalTo(78)
+            })
+            optview.
+        }
+        
         
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+    }
+    
+    func handlePub() {
+
+    }
+    
+    func showSelectionTable() {
+        
+    }
     
     func handleBackBtn() {
         dismiss(animated: false, completion: nil)//
-        
     }
     
     override func didReceiveMemoryWarning() {

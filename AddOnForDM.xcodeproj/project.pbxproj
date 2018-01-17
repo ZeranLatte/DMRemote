@@ -17,6 +17,11 @@
 		210E2D19200D7FF5005B7696 /* JitterTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210E2D16200D7FF4005B7696 /* JitterTF.swift */; };
 		210E2D1A200D7FF5005B7696 /* JitterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210E2D17200D7FF5005B7696 /* JitterButton.swift */; };
 		210E2D1B200D7FF5005B7696 /* FadeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210E2D18200D7FF5005B7696 /* FadeLabel.swift */; };
+		210E2D1D200E865D005B7696 /* PublishForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210E2D1C200E865D005B7696 /* PublishForm.swift */; };
+		210E2D1F200EA3EF005B7696 /* PublishDescriptionInputVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210E2D1E200EA3EF005B7696 /* PublishDescriptionInputVC.swift */; };
+		210E2D21200EA934005B7696 /* PublishDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210E2D20200EA934005B7696 /* PublishDescriptionView.swift */; };
+		210E2D23200EBA14005B7696 /* PublishSelectTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210E2D22200EBA14005B7696 /* PublishSelectTableVC.swift */; };
+		210E2D25200EBF8B005B7696 /* PublishSelectionTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210E2D24200EBF8B005B7696 /* PublishSelectionTableCell.swift */; };
 		4FD7068B200DD10100EF78C0 /* PublishFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD7068A200DD10100EF78C0 /* PublishFormViewController.swift */; };
 		4FD7068D200DD4F400EF78C0 /* PublishFormSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD7068C200DD4F400EF78C0 /* PublishFormSelectionView.swift */; };
 		6940FD67A6D03D7BC5BDCD44 /* Pods_AddOnForDM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFA1BFB1DF23CC6512EDDBBC /* Pods_AddOnForDM.framework */; };
@@ -35,6 +40,11 @@
 		210E2D16200D7FF4005B7696 /* JitterTF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JitterTF.swift; sourceTree = "<group>"; };
 		210E2D17200D7FF5005B7696 /* JitterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JitterButton.swift; sourceTree = "<group>"; };
 		210E2D18200D7FF5005B7696 /* FadeLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FadeLabel.swift; sourceTree = "<group>"; };
+		210E2D1C200E865D005B7696 /* PublishForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishForm.swift; sourceTree = "<group>"; };
+		210E2D1E200EA3EF005B7696 /* PublishDescriptionInputVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishDescriptionInputVC.swift; sourceTree = "<group>"; };
+		210E2D20200EA934005B7696 /* PublishDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishDescriptionView.swift; sourceTree = "<group>"; };
+		210E2D22200EBA14005B7696 /* PublishSelectTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishSelectTableVC.swift; sourceTree = "<group>"; };
+		210E2D24200EBF8B005B7696 /* PublishSelectionTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishSelectionTableCell.swift; sourceTree = "<group>"; };
 		4FD7068A200DD10100EF78C0 /* PublishFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishFormViewController.swift; sourceTree = "<group>"; };
 		4FD7068C200DD4F400EF78C0 /* PublishFormSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishFormSelectionView.swift; sourceTree = "<group>"; };
 		675AF91D609D78DE7C0DE1E9 /* Pods-AddOnForDM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AddOnForDM.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AddOnForDM/Pods-AddOnForDM.debug.xcconfig"; sourceTree = "<group>"; };
@@ -82,14 +92,27 @@
 				210E2D18200D7FF5005B7696 /* FadeLabel.swift */,
 				210E2D17200D7FF5005B7696 /* JitterButton.swift */,
 				210E2D16200D7FF4005B7696 /* JitterTF.swift */,
-				4FD7068A200DD10100EF78C0 /* PublishFormViewController.swift */,
+				210E2D26200EE367005B7696 /* Publish */,
 				210E2CB6200D7E44005B7696 /* Main.storyboard */,
-				4FD7068C200DD4F400EF78C0 /* PublishFormSelectionView.swift */,
 				210E2CB9200D7E44005B7696 /* Assets.xcassets */,
 				210E2CBB200D7E44005B7696 /* LaunchScreen.storyboard */,
 				210E2CBE200D7E44005B7696 /* Info.plist */,
 			);
 			path = AddOnForDM;
+			sourceTree = "<group>";
+		};
+		210E2D26200EE367005B7696 /* Publish */ = {
+			isa = PBXGroup;
+			children = (
+				210E2D1C200E865D005B7696 /* PublishForm.swift */,
+				4FD7068C200DD4F400EF78C0 /* PublishFormSelectionView.swift */,
+				210E2D20200EA934005B7696 /* PublishDescriptionView.swift */,
+				210E2D22200EBA14005B7696 /* PublishSelectTableVC.swift */,
+				210E2D24200EBF8B005B7696 /* PublishSelectionTableCell.swift */,
+				210E2D1E200EA3EF005B7696 /* PublishDescriptionInputVC.swift */,
+				4FD7068A200DD10100EF78C0 /* PublishFormViewController.swift */,
+			);
+			path = Publish;
 			sourceTree = "<group>";
 		};
 		55882567F938C9AECE8ED871 /* Frameworks */ = {
@@ -234,13 +257,18 @@
 			files = (
 				4FD7068D200DD4F400EF78C0 /* PublishFormSelectionView.swift in Sources */,
 				210E2D15200D7FE7005B7696 /* Flashable.swift in Sources */,
+				210E2D1F200EA3EF005B7696 /* PublishDescriptionInputVC.swift in Sources */,
 				210E2D1B200D7FF5005B7696 /* FadeLabel.swift in Sources */,
 				210E2D14200D7FE7005B7696 /* Jitterable.swift in Sources */,
 				210E2CB5200D7E44005B7696 /* ViewController.swift in Sources */,
 				4FD7068B200DD10100EF78C0 /* PublishFormViewController.swift in Sources */,
+				210E2D25200EBF8B005B7696 /* PublishSelectionTableCell.swift in Sources */,
 				210E2CB3200D7E44005B7696 /* AppDelegate.swift in Sources */,
+				210E2D1D200E865D005B7696 /* PublishForm.swift in Sources */,
+				210E2D21200EA934005B7696 /* PublishDescriptionView.swift in Sources */,
 				210E2D19200D7FF5005B7696 /* JitterTF.swift in Sources */,
 				210E2D1A200D7FF5005B7696 /* JitterButton.swift in Sources */,
+				210E2D23200EBA14005B7696 /* PublishSelectTableVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
