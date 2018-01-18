@@ -9,12 +9,43 @@
 import UIKit
 import SnapKit
 
-class PublishFormSelectionView: UIView {
+/// Base view in publish user inspiration
+class PublishFormBaseView: UIView {
+    let leftMargin: CGFloat = 11
+    lazy var greyline: UIView = {
+        let gl = UIView()
+        gl.backgroundColor = UIColor.lightGray
+        return gl
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupSharedView()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    func setupSharedView() {
+        addSubview(greyline)
+    }
+    
+    func setGreylineLayout() {
+        greyline.snp.makeConstraints { (make) in
+            make.left.equalTo(self).offset(leftMargin)
+            make.right.bottom.equalTo(self)
+            make.height.equalTo(0.5)
+        }
+    }
+    
+}
+
+class PublishFormSelectionView: PublishFormBaseView {
     
     // callback connection to viewcontroller
-    var tapped: (() -> Void)?
+    var tapped: ((_ title: String) -> Void)?
     
-    let leftMargin: CGFloat = 11
     let rightMargin: CGFloat = 21
     
     var defaultTextColor = UIColor.black
@@ -38,12 +69,7 @@ class PublishFormSelectionView: UIView {
         iv.contentMode = .scaleAspectFit
         return iv
     }()
-    
-    lazy var greyline: UIView = {
-        let gl = UIView()
-        gl.backgroundColor = UIColor.lightGray
-        return gl
-    }()
+
     
     init(leftTitle: String, rightTitle: String, withArrow: Bool = true) {
         super.init(frame: CGRect.zero)
@@ -74,11 +100,8 @@ class PublishFormSelectionView: UIView {
             make.top.bottom.equalTo(self)
             make.left.equalTo(self.snp.centerX).offset(60)
         }
-        greyline.snp.makeConstraints { (make) in
-            make.left.equalTo(leftMargin)
-            make.right.bottom.equalTo(self)
-            make.height.equalTo(1)
-        }
+
+        super.setGreylineLayout()
         super.updateConstraints()
     }
     
@@ -90,7 +113,6 @@ class PublishFormSelectionView: UIView {
         addSubview(titleLabel)
         addSubview(optionLabel)
         addSubview(arrow)
-        addSubview(greyline)
     }
     
     func setRightTitle(text: String) {
@@ -102,8 +124,11 @@ class PublishFormSelectionView: UIView {
     }
     
     func handleTap() {
+        guard let title = titleLabel.text else {
+            return
+        }
         if let callback = tapped {
-            callback()
+            callback(title)
         }
     }
 }

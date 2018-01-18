@@ -30,7 +30,6 @@ class PublishSelectionTableCell: BaseTableViewCell {
     
     lazy var titleLabel: UILabel = {
         let lbl = UILabel()
-        lbl.backgroundColor = UIColor.lightGray
         lbl.textColor = .black
         lbl.textAlignment = .center
         return lbl

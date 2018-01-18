@@ -11,7 +11,7 @@ import UIKit
 class PublishSelectTableVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
-    var selectCallback: (() -> Void)?
+    var selectCallback: ((_ index: Int, _ title: String) -> Void)?
     
     var topShadeView: UIView = {
         let sha = UIView()
@@ -22,6 +22,7 @@ class PublishSelectTableVC: UIViewController, UITableViewDelegate, UITableViewDa
     
     var tableView: UITableView = {
         let tbl = UITableView(frame: CGRect.zero, style: .plain)
+        tbl.backgroundColor = .white
         tbl.allowsSelection = true
         return tbl
     }()
@@ -39,7 +40,6 @@ class PublishSelectTableVC: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.addSubview(tableView)
         view.addSubview(topShadeView)
         
@@ -54,10 +54,12 @@ class PublishSelectTableVC: UIViewController, UITableViewDelegate, UITableViewDa
         let dismissTap = UITapGestureRecognizer(target: self, action: #selector(handleShadeTap))
         topShadeView.addGestureRecognizer(dismissTap)
         
+        tableView.delegate = self
+        tableView.dataSource = self
         tableView.register(PublishSelectionTitleCell.self, forCellReuseIdentifier: titleCellId)
         tableView.register(PublishSelectionTableCell.self, forCellReuseIdentifier: selectionCellId)
         tableView.rowHeight = UITableViewAutomaticDimension
-        
+        tableView.estimatedRowHeight = 56
         tableView.tableFooterView = UIView()
         
         UIView.animate(withDuration: 0.4) {
@@ -69,11 +71,11 @@ class PublishSelectTableVC: UIViewController, UITableViewDelegate, UITableViewDa
     func reloadWithData(option: PublishOption) {
         
         // scroll position/index
-        
+        print(option.options)
         tableView.reloadData()
         let idxPath = IndexPath(row: dataSrc?.selectedIdx ?? 0, section: 1)
         tableView.selectRow(at: idxPath, animated: false, scrollPosition: .middle)
-        //tableView.scrollToNearestSelectedRow(at: .middle, animated: false)
+        tableView.scrollToNearestSelectedRow(at: .top, animated: false)
     }
     
     func handleShadeTap() {
@@ -117,12 +119,14 @@ class PublishSelectTableVC: UIViewController, UITableViewDelegate, UITableViewDa
         case 0:
             return
         default:
+            guard let data = dataSrc else {
+                return
+            }
             if let callback = selectCallback {
-                callback()
+                callback(indexPath.row, data.title)
             }
             dismiss(animated: true, completion: nil)
         }
     }
-    
     
 }

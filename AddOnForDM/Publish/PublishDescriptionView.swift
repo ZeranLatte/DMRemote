@@ -8,10 +8,10 @@
 
 import UIKit
 
-class PublishDescriptionView: UIView {
+class PublishDescriptionView: PublishFormBaseView {
     // callback connection to viewcontroller
     var tapped: (() -> Void)?
-    let leftMargin: CGFloat = 11
+
     let margin: CGFloat = 20
     
     lazy var titleLabel: UILabel = {
@@ -26,18 +26,17 @@ class PublishDescriptionView: UIView {
         lbl.textColor = UIColor.lightText
         return lbl
     }()
-    lazy var greyline: UIView = {
-        let gl = UIView()
-        gl.backgroundColor = UIColor.lightGray
-        return gl
-    }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
+
+    override func setupSharedView() {
+        super.setupSharedView()
         addSubview(titleLabel)
         addSubview(desLabel)
-        addSubview(greyline)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        addGestureRecognizer(tap)
+    }
+    
+    override func updateConstraints() {
         titleLabel.snp.makeConstraints { (make) in
             make.left.equalTo(leftMargin)
             make.top.equalTo(margin)
@@ -50,13 +49,8 @@ class PublishDescriptionView: UIView {
             make.right.equalTo(-margin)
             make.bottom.equalTo(-margin)
         }
-        greyline.snp.makeConstraints { (make) in
-            make.left.equalTo(leftMargin)
-            make.right.bottom.equalTo(self)
-            make.height.equalTo(1)
-        }
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        addGestureRecognizer(tap)
+        super.setGreylineLayout()
+        super.updateConstraints()
     }
     
     func handleTap() {
@@ -64,9 +58,5 @@ class PublishDescriptionView: UIView {
             callback()
         }
     }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+
 }
