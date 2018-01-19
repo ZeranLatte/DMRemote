@@ -99,12 +99,15 @@ class PublishFormViewController: UIViewController {
         titleImgView.imgLocalUrl = "arrow2"
         titleImgView.titleTextField.delegate = self
         titleImgView.titleText = "arrow2"
-        let options = PublishForm.options
+        let options = PublishForm().allOptions()
         
         var lastview: UIView = desView
         for (index, opt) in options.enumerated() {
-            let leftText = opt[0]
-            let rightText = opt[1]
+            let leftText = opt.getTitle()
+            var rightText = opt.options[opt.selectedIdx].name.capitalized
+            if opt.type == .price {
+                rightText = opt.options[opt.selectedIdx].number!.description
+            }
             let hasArrow = index != 3 ? true : false
             let optview = PublishFormSelectionView(leftTitle: leftText, rightTitle: rightText, withArrow: hasArrow)
             scrollView.addSubview(optview)
@@ -115,7 +118,7 @@ class PublishFormViewController: UIViewController {
             })
             optview.tapped = { [weak self] title in
                 print("\(index) === \(title)")
-                self?.showSelectionTable()
+                self?.showSelectionTable(index: index)
             }
             lastview = optview
         }
@@ -123,18 +126,24 @@ class PublishFormViewController: UIViewController {
         scrollView.contentSize = view.bounds.size
     }
     
-    func showSelectionTable() {
+    func showSelectionTable(index: Int) {
+        if index == 3 { // price view
+            return
+        }
         let selectionTable = PublishSelectTableVC()
-        let styles = ["Modern", "Modern", "Modern", "Modern", "Modern", "Industrial", "Industrial"] // all styles names
-        var pubOption = PublishOption(title: "Select a Style", options: styles)
+        
+        //let styles = ["Modern", "Modern", "Modern", "Modern", "Modern", "Industrial", "Industrial"] // all styles names
+        
+        let allOptions = PublishForm().allOptions()
+        
         selectionTable.modalPresentationStyle = .overCurrentContext
 
         present(selectionTable, animated: true) {
             
         }
         // TODO: set selected index or data in option
-        pubOption.selectedIdx = 1
-        selectionTable.dataSrc = pubOption
+
+        selectionTable.dataSrc = allOptions[index]
         selectionTable.selectCallback = { [weak self] (idx, title) in
             // TODO: update UserInspiration data
         }

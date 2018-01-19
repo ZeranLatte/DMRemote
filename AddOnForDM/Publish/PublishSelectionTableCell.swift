@@ -52,30 +52,52 @@ class PublishSelectionTableCell: BaseTableViewCell {
         }
     }
     
-    func configure(title: String) {
-        titleLabel.text = title
+    func configure(option: PublishForm.Option) {
+        
+        
+        if let num = option.number {
+            // TODO: special treat price
+        } else {
+            titleLabel.text = option.name.capitalized
+        }
+        
     }
     
 }
 
 
-class PublishSelectionTitleCell: BaseTableViewCell {
+class PublishSelectionHeader: UITableViewHeaderFooterView {
     
     let leftMargin: CGFloat = 11
     
     lazy var label: UILabel = {
         let lbl = UILabel()
-        lbl.textAlignment = .left
+        lbl.textAlignment = .center
         lbl.textColor = .black
         return lbl
     }()
     
-    override func setup() {
-        contentView.addSubview(label)
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+        
+        setup()
+    }
+    
+    override func updateConstraints() {
         label.snp.makeConstraints { (make) in
-            make.edges.equalTo(UIEdgeInsets(top: 0, left: leftMargin, bottom: 0, right: 100))
-            make.height.equalTo(44)
+            make.edges.equalTo(UIEdgeInsets(top: 0, left: leftMargin, bottom: 0, right: 0))
+            make.height.equalTo(44).priority(.medium)
         }
+        super.updateConstraints()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setup() {
+        contentView.addSubview(label)
+        
     }
     
     func configure(titleText: String) {

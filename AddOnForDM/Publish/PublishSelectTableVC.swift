@@ -11,7 +11,7 @@ import UIKit
 class PublishSelectTableVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
-    var selectCallback: ((_ index: Int, _ title: String) -> Void)?
+    var selectCallback: ((_ index: Int, _ option: PublishForm.Option) -> Void)?
     
     var topShadeView: UIView = {
         let sha = UIView()
@@ -35,7 +35,7 @@ class PublishSelectTableVC: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
-    let titleCellId = "PublishSelectionTitleCell"
+    let titleHeaderCellId = "PublishSelectionHeader"
     let selectionCellId = "PublishSelectionTableCell"
     
     override func viewDidLoad() {
@@ -56,8 +56,9 @@ class PublishSelectTableVC: UIViewController, UITableViewDelegate, UITableViewDa
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(PublishSelectionTitleCell.self, forCellReuseIdentifier: titleCellId)
+
         tableView.register(PublishSelectionTableCell.self, forCellReuseIdentifier: selectionCellId)
+        tableView.register(PublishSelectionHeader.self, forHeaderFooterViewReuseIdentifier: titleHeaderCellId)
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 56
         tableView.tableFooterView = UIView()
@@ -66,14 +67,13 @@ class PublishSelectTableVC: UIViewController, UITableViewDelegate, UITableViewDa
             self.topShadeView.alpha = 1
         }
     }
-
     
     func reloadWithData(option: PublishOption) {
         
         // scroll position/index
         print(option.options)
         tableView.reloadData()
-        let idxPath = IndexPath(row: dataSrc?.selectedIdx ?? 0, section: 1)
+        let idxPath = IndexPath(row: dataSrc?.selectedIdx ?? 0, section: 0)
         tableView.selectRow(at: idxPath, animated: false, scrollPosition: .middle)
         tableView.scrollToNearestSelectedRow(at: .top, animated: false)
     }
@@ -86,47 +86,43 @@ class PublishSelectTableVC: UIViewController, UITableViewDelegate, UITableViewDa
     // MARK: delegate
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return 1
-        default:
-            return dataSrc?.options.count ?? 0
-        }
+        return dataSrc?.options.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let data = dataSrc else {
             return UITableViewCell()
         }
-        switch indexPath.section {
-        case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: titleCellId) as! PublishSelectionTitleCell
-            cell.configure(titleText: data.title)
-            return cell
-        default:
-            let cell = tableView.dequeueReusableCell(withIdentifier: selectionCellId, for: indexPath) as! PublishSelectionTableCell
-            cell.configure(title: data.options[indexPath.row])
-            return cell
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: selectionCellId, for: indexPath) as! PublishSelectionTableCell
+        cell.configure(option: data.options[indexPath.row])
+        return cell
     }
-    
+        
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.section {
-        case 0:
+        guard let option = dataSrc else {
             return
-        default:
-            guard let data = dataSrc else {
-                return
-            }
-            if let callback = selectCallback {
-                callback(indexPath.row, data.title)
-            }
-            dismiss(animated: true, completion: nil)
         }
+        if let callback = selectCallback {
+            callback(indexPath.row, option.options[indexPath.row])
+        }
+        dismiss(animated: true, completion: nil)
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 56
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = PublishSelectionHeader(reuseIdentifier: titleHeaderCellId)
+        header.frame = CGRect(origin: .zero, size: CGSize(width: view.frame.width, height: 56))
+        if let data = self.dataSrc {
+            header.configure(titleText: data.getTitle().capitalized)
+        }
+        
+        return header
+    }
 }

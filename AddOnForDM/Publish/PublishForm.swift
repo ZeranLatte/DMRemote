@@ -10,28 +10,24 @@ import Foundation
 
 struct PublishForm {
     
+    
+    // data abstraction for style, category, space size, price selection for user inspiration
     struct Option {
-        var id: String
-        var name: String
+        let id: String
+        let name: String
+        
+        var number: Double? = nil
+        
+        init(id: String, name: String, number: Double? = nil) {
+            self.id = id
+            self.name = name
+            self.number = number
+        }
     }
-
-    static let options: [[String]] = [["Select a Style", "Modern"],
-                             ["Select a Category", "Dining"],
-                             ["Space size", "Compact"],
-                             ["Total Price", "$1,000.00"]]
     
-    
-    
-    var title: String = ""
-    
-    var description = ""
-    
-    var styleId: String = ""
-    var categoryId: String = ""
-    var totalPrice: Double = 0
-    
-    var size: String = ""
-    
+    init() {
+        
+    }
     
     func allOptions() -> [PublishOption] {
         var result: [PublishOption] = []
@@ -43,7 +39,7 @@ struct PublishForm {
             let opt = Option(id: id, name: name)
             return opt
         }
-        let styleOption = PublishOption(title: "Select a Style", options: styles)
+        let styleOption = PublishOption(type: .style, options: styles)
         result.append(styleOption)
         
         // exclude 'accessory' and 'lighting'
@@ -53,17 +49,18 @@ struct PublishForm {
             let opt = Option(id: id, name: name)
             return opt
         }
-        let cateOption = PublishOption(title: "Select a Category", options: spaceOptions)
+        let cateOption = PublishOption(type: .category, options: spaceOptions)
         result.append(cateOption)
         
         // space size
         let sizes = ["Compact", "Medium", "Large", "Luxury"]
         let opts = generateSpaceSizes(spaceSizes: sizes)
-        let spaceSizeOption = PublishOption(title: "Select a Space Size", options: opts)
+        let spaceSizeOption = PublishOption(type: .size, options: opts)
         result.append(spaceSizeOption)
         
         // price
-        let priceOption = PublishOption(title: "Total Price", options: [])
+        let priceOpt = Option(id: "price", name: "price", number: 1900.0)
+        let priceOption = PublishOption(type: .price, options: [priceOpt])
         result.append(priceOption)
         
         return result
@@ -83,19 +80,38 @@ struct PublishForm {
 
 struct PublishOption {
     
+    enum OptionType: String {
+        case style = "style"
+        case category = "category"
+        case size = "size"
+        case price = "price"
+    }
     
-    var title: String
+    let type: OptionType
     
     // either all-styles, all-categorys, all-spaces
-    var options: [PublishForm.Option]
+    let options: [PublishForm.Option]
     
     var selectedIdx: Int = 0
     
-    init(title: String, options: [PublishForm.Option]) {
-        self.title = title
+    init(type: OptionType, options: [PublishForm.Option]) {
+        self.type = type
         self.options = options
     }
     
+    
+    func getTitle() -> String {
+        switch type {
+        case .category:
+            return "Select a Category"
+        case .style:
+            return "Select a Style"
+        case .size:
+            return "Space Size"
+        default: // price
+            return "Total Price"
+        }
+    }
     
     func allNames() -> [String] {
         return []
